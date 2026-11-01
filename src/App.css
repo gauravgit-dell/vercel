@@ -835,3 +835,12 @@
     overflow-wrap: anywhere;
   }
 }
+/* Hide unwanted green objects on mobile only */
+@media (max-width: 650px) {
+  .palm,
+  .palm-left,
+  .palm-right,
+  .palm-leaves {
+    display: none !important;
+  }
+}
