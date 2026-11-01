@@ -2,9 +2,17 @@
 .website {
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
+  max-width: 100%;
+  overflow-x: clip;
   background: #140b1c;
   color: #fff;
+  box-sizing: border-box;
+}
+
+.website *,
+.website *::before,
+.website *::after {
+  box-sizing: border-box;
 }
 
 /* NAVIGATION */
@@ -323,9 +331,6 @@
 
 /* INSTAGRAM BUTTON */
 
-
-/* INSTAGRAM BUTTON */
-
 .official-button {
   position: relative;
   display: inline-flex;
@@ -333,25 +338,15 @@
   justify-content: center;
   gap: 12px;
   padding: 0 22px;
-
   color: #fff0fa;
   background:
     linear-gradient(#211027, #211027) padding-box,
-    linear-gradient(
-      110deg,
-      #a72cff,
-      #ed168e,
-      #ff633d,
-      #ffb323
-    ) border-box;
-
+    linear-gradient(110deg, #a72cff, #ed168e, #ff633d, #ffb323) border-box;
   border: 1.5px solid transparent;
   border-radius: 5px;
-
   box-shadow:
     0 0 12px rgba(190, 40, 220, 0.18),
     0 0 22px rgba(255, 75, 130, 0.12);
-
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -372,18 +367,10 @@
 .official-button:hover {
   background:
     linear-gradient(#35102e, #35102e) padding-box,
-    linear-gradient(
-      110deg,
-      #a72cff,
-      #ed168e,
-      #ff633d,
-      #ffb323
-    ) border-box;
-
+    linear-gradient(110deg, #a72cff, #ed168e, #ff633d, #ffb323) border-box;
   box-shadow:
     0 0 15px rgba(190, 40, 220, 0.4),
     0 0 30px rgba(255, 75, 130, 0.3);
-
   transform: translateY(-3px);
 }
 
@@ -394,7 +381,6 @@
 .official-button:hover .instagram-arrow {
   transform: translate(3px, -3px);
 }
-
 
 /* YOUTUBE BUTTON */
 
@@ -434,13 +420,7 @@
   border-top: 2px solid rgba(255,255,255,.5);
   background:
     linear-gradient(to bottom, transparent 50%, rgba(37,13,43,.2)),
-    linear-gradient(
-      to bottom,
-      #57244f 0%,
-      #a34878 36%,
-      #e88b94 72%,
-      #ffb48c 100%
-    );
+    linear-gradient(to bottom, #57244f 0%, #a34878 36%, #e88b94 72%, #ffb48c 100%);
 }
 
 .city-location {
@@ -459,8 +439,6 @@
 .city-location svg {
   color: #ffcc80;
 }
-
-/* SUN */
 
 .sun {
   position: absolute;
@@ -503,13 +481,7 @@
 .windows {
   position: absolute;
   inset: 8px 5px;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 11px,
-    rgba(224, 151, 194, .42) 12px,
-    rgba(224, 151, 194, .42) 14px
-  );
+  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 11px, rgba(224, 151, 194, .42) 12px, rgba(224, 151, 194, .42) 14px);
 }
 
 .city-road {
@@ -637,12 +609,35 @@
 /* MOBILE */
 
 @media (max-width: 650px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .website {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
   .navbar {
+    width: 100%;
     height: 65px;
   }
 
   .nav-container {
     width: 92%;
+    min-width: 0;
   }
 
   .brand {
@@ -670,8 +665,15 @@
   }
 
   .hero-section {
+    width: 100%;
+    min-width: 0;
     min-height: 820px;
-    padding-top: 45px;
+    padding: 45px 14px;
+  }
+
+  .hero-content {
+    width: 100%;
+    min-width: 0;
   }
 
   .gta-logo {
@@ -680,11 +682,12 @@
   }
 
   .gta-words {
-    font-size: 76px;
+    font-size: clamp(58px, 15vw, 76px);
   }
 
   .gta-six {
-    font-size: 100px;
+    font-size: clamp(80px, 20vw, 100px);
+    right: 0;
   }
 
   .welcome-heading {
@@ -696,13 +699,23 @@
     font-size: 11px;
   }
 
+  .timer-heading {
+    max-width: 100%;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-align: center;
+  }
+
   .countdown-grid {
     width: 100%;
     max-width: 420px;
-    grid-template-columns: repeat(2, 1fr);
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .countdown-card {
+    min-width: 0;
     height: 85px;
   }
 
@@ -710,24 +723,66 @@
     font-size: 35px;
   }
 
+  .countdown-card span {
+    letter-spacing: 2px;
+  }
+
+  .release-date {
+    max-width: 100%;
+  }
+
+  .release-label {
+    gap: 8px;
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .release-label span {
+    width: 45px;
+  }
+
+  .release-date h3 {
+    font-size: 14px;
+  }
+
   .action-buttons {
     flex-direction: column;
-    width: min(320px, 100%);
+    width: 100%;
+    max-width: 320px;
     gap: 10px;
   }
 
   .action-button {
     width: 100%;
-    min-height: 43px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 12px;
+    font-size: 9px;
+  }
+
+  .official-button {
+    gap: 9px;
+  }
+
+  .instagram-icon {
+    width: 21px;
+    height: 21px;
   }
 
   .gaming-line {
+    max-width: 100%;
     font-size: 7px;
     letter-spacing: 1px;
+    line-height: 1.8;
   }
 
   .city-scene {
+    width: 100%;
     height: 180px;
+  }
+
+  .city-location {
+    left: 6%;
   }
 
   .skyline {
@@ -751,7 +806,24 @@
     transform: scaleX(-1) scale(.7);
   }
 
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee span {
+    white-space: nowrap;
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 29px 0 18px;
+  }
+
   .footer-content {
+    width: 88%;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
@@ -760,5 +832,6 @@
   .disclaimer {
     padding: 0 15px;
     line-height: 1.8;
+    overflow-wrap: anywhere;
   }
 }
